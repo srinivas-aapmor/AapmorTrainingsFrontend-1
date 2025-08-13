@@ -1,0 +1,17 @@
+export const apiEndpoints = {
+  verifyToken: "/verify-token",
+  adminDashboardEndpoint: "/admin-dashboard",
+  teamleadDashBoardEndpoint: "/teamlead-dashboard",
+  userDashBoardEndpoint: "/user-dashboard",
+  uploadTrainings: "/trainings",
+  deleteTrainingEndpoint: (id) => `/trainings/${id}`,
+  updateTrainingEndpoint: (id) => `/trainings/${id}`,
+  deleteTrainingEndpoint: (id) => `/trainings/${id}`,
+  fetchTicketDetails: (ticketId) => `/tickets/${ticketId}`,
+  fetchDepartments: "/users/departments",
+  assignTasks: "/assign-trainings",
+  fetchTrainingsforTL: "/trainings-for-teamlead",
+  fetchEmployeeTrainings: "/users-trainings",
+  fetchUsers: "/users",
+  getTraining: (id) => `/trainings/${id}`,
+};
