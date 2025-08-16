@@ -3,13 +3,11 @@
     "rewrite": "/index.html",
     "exclude": [
       "/assets/*",
-      "/*.css",
-      "/*.js",
+      "/favicon.ico",
       "/*.png",
       "/*.jpg",
       "/*.gif",
-      "/*.ico",
-      "/favicon.ico"
+      "/*.ico"
     ]
   }
 }
