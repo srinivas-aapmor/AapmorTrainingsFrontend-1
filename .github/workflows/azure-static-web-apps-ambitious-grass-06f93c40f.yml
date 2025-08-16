@@ -50,13 +50,14 @@ jobs:
         if: failure()
         run: |
           curl -H 'Content-Type: application/json' \
-               -d "{\"text\": \"Deployment failed for Azure Static Web App. Please check logs.  \n\n_By Srinivas Reddy_\"}" \
-               ${{ secrets.TEAMS_WEBHOOK_URL }}
+               -d "{\"text\": \"🚨 Deployment failed for Azure Static Web App. Please check logs.  \n\n_By Srinivas Reddy_\"}" \
+               ${{ secrets.INCOMING_WEBHOOK }}
 
       - name: Notify Teams Success
         if: success()
         run: |
           curl -H 'Content-Type: application/json' \
-               -d "{\"text\": \"Application deployed successfully.  \n However, API calls to ${{ secrets.VITE_AUTHX_URL }}/login/send-otp are returning **403 (CORS Missing Allow Origin / Site Disabled)**.  \n\n_By Srinivas Reddy_\"}" \
-               ${{ secrets.TEAMS_WEBHOOK_URL }}
+               -d "{\"text\": \"✅ Application deployed successfully.  \n⚠️ Note: API calls to /login/send-otp are still returning 403 (CORS Missing Allow Origin / Site Disabled).  \n\n_By Srinivas Reddy_\"}" \
+               ${{ secrets.INCOMING_WEBHOOK }}
+
 
