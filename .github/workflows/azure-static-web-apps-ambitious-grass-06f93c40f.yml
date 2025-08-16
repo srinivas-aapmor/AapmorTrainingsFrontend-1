@@ -46,6 +46,7 @@ jobs:
           VITE_AUTHX_USERSDEPARTMENTNAMES: ${{ secrets.VITE_AUTHX_USERSDEPARTMENTNAMES }}
           VITE_PERMISSIONS_URL: ${{ secrets.VITE_PERMISSIONS_URL }}
 
+      # 🔍 Check AuthX API health
       - name: Check AuthX API health
         id: check-api
         run: |
