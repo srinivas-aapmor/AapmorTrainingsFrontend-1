@@ -38,4 +38,11 @@ jobs:
           action: "upload"
           app_location: "/"       
           api_location: ""           
-          output_location: "dist"    
+          output_location: "dist"
+        env:  
+          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
+          VITE_REDIRECT_URL: ${{ secrets.VITE_REDIRECT_URL }}
+          VITE_DOMAIN: ${{ secrets.VITE_DOMAIN }}
+          VITE_AUTHX_URL: ${{ secrets.VITE_AUTHX_URL }}
+          VITE_AUTHX_USERSDEPARTMENTNAMES: ${{ secrets.VITE_AUTHX_USERSDEPARTMENTNAMES }}
+          VITE_PERMISSIONS_URL: ${{ secrets.VITE_PERMISSIONS_URL }}
