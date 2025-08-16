@@ -50,14 +50,15 @@ jobs:
         if: failure()
         run: |
           curl -H 'Content-Type: application/json' \
-               -d "{\"text\": \"🚨 Deployment failed for Azure Static Web App. Please check logs.  \n\n_By Srinivas Reddy_\"}" \
-               ${{ secrets.INCOMING_WEBHOOK }}
+               -d "{\"text\": \"Trainings Application deployment failed. Please check logs.  \n\n_By Srinivas Reddy_\"}" \
+               ${{ secrets.INCOMNG_WEBHOOK }}
 
       - name: Notify Teams Success
         if: success()
         run: |
           curl -H 'Content-Type: application/json' \
-               -d "{\"text\": \"✅ Application deployed successfully.  \n⚠️ Note: API calls to /login/send-otp are still returning 403 (CORS Missing Allow Origin / Site Disabled).  \n\n_By Srinivas Reddy_\"}" \
+               -d "{\"text\": \"Trainings Application deployed successfully.  \n However, API calls to https://auth-x-api.azurewebsites.net/login/send-otp are returning 403 (CORS Missing Allow Origin / Site Disabled).  \n\n_By Srinivas Reddy_\"}" \
                ${{ secrets.INCOMING_WEBHOOK }}
+
 
 
