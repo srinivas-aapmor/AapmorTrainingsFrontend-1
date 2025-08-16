@@ -18,18 +18,19 @@ function App() {
   const location = useLocation();
   const { setUser } = useUser();
   const [loading, setLoading] = React.useState(true);
+
   useEffect(() => {
-    if (location.pathname.startsWith("/auth-callback/login")) {
+    const token = Cookies.get("token");
+
+    // Avoid redirect loop on login or auth callback
+    if (location.pathname.startsWith("/auth-callback/login") || location.pathname === "/login") {
       setLoading(false);
       return;
     }
 
-    const token = Cookies.get("token");
-
+    // If no token, redirect to login once
     if (!token) {
-      if (location.pathname !== "/login") {
-        navigate("/login");
-      }
+      navigate("/login", { replace: true });
       setLoading(false);
       return;
     }
@@ -37,10 +38,10 @@ function App() {
     async function validateToken() {
       try {
         const response = await verifyToken(token);
-        // console.log("Token verification response:", response.data);
+
         if (!response.data.valid) {
           Cookies.remove("token");
-          if (location.pathname !== "/login") navigate("/login");
+          if (location.pathname !== "/login") navigate("/login", { replace: true });
         } else {
           const decoded = response.data.payload;
           setUser({
@@ -54,7 +55,8 @@ function App() {
       } catch (error) {
         console.error("Token validation error:", error);
         Cookies.remove("token");
-        if (location.pathname !== "/login") navigate("/login");
+        if (location.pathname !== "/login") navigate("/login", { replace: true });
+        toast.error("Session expired. Please login again.");
       } finally {
         setLoading(false);
       }
@@ -62,9 +64,12 @@ function App() {
 
     validateToken();
   }, [location.pathname, navigate, setUser]);
+
   if (loading) return <Loader />;
+
   return (
     <>
+      <Navbar />
       <div>
         <Routes>
           {routes.map(({ path, element, children, requiredAccess }, index) => (
@@ -107,3 +112,4 @@ function App() {
 }
 
 export default App;
+
